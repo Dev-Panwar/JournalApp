@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: Journal App
+
+  data:
+    mongodb:
+      uri: mongodb+srv://devpanwar:qazxsw@cluster0.re3e6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      #if not created already...it will create one
+      database: journaldb
+      #for indexing in mongoDB...like we want to make a unique value
+      auto-index-creation: true
+      # Uncomment the following lines if you have a username and password
+      # username: journaldb
+      # password: journaldb
+
+  main:
+    allow-circular-references: true
+
+server:
+  port: 8081

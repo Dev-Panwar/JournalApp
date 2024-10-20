@@ -1,0 +1,37 @@
+<configuration>
+    <appender name="myConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+
+    </appender>
+
+<!--    differentiating where we want to do logging...In file or console-->
+<!--    we are using rolling file appender..because normal file appender will just append logs to single file all the time...to set condition for using different files based on time or when a particular size is reached-->
+    <appender name="myFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>
+            journalApp.log
+        </file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+<!--            name convention for new files-->
+            <fileNamePattern>journalApp.log-%d{yy-MM-dd_HH-mm}.%i.log</fileNamePattern>
+<!--            create a new file if file size reached 10MB-->
+            <maxFileSize>10MB</maxFileSize>
+<!--            when more than 10 files is created older one is deleted-->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                %d{yy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="myConsoleAppender"/>
+        <appender-ref ref="myFileAppender"/>
+    </root>
+
+</configuration>
