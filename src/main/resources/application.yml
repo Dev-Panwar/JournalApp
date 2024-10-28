@@ -1,3 +1,15 @@
 spring:
   profiles:
     active: dev
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: devpanwar2907@gmail.com
+    password: jaie ceyj wpwi kmdr
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
