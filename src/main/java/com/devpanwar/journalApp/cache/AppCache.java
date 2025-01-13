@@ -20,7 +20,7 @@ public class AppCache {
         WEATHER_API;
     }
 
-//    when during post construct this Bean is created only once and hence we can use it as in memory Cache.
+//    when during post-construct, this Bean is created only once and hence we can use it as in memory Cache.
     public Map<String,String> appCache;
 
     @PostConstruct
