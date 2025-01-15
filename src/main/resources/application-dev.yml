@@ -3,6 +3,14 @@ spring:
     name: Journal App
 
   data:
+    redis:
+      host: redis-11579.crce179.ap-south-1-1.ec2.redns.redis-cloud.com
+      port: 11579
+      password: DjDYc1NmR13lBNGuwieAMFJ28CAABHxd
+
+    #    for local
+    #    host: localhost
+    #    port: 6379
     mongodb:
       uri: mongodb+srv://devpanwar:qazxsw@cluster0.re3e6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       #if not created already...it will create one

@@ -65,7 +65,7 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        getting username after authentication is successful
         String userName = authentication.getName();
-        WeatherResponse weather=weatherService.getWeather("Jodhpur");
+        WeatherResponse weather=weatherService.getWeather("Mumbai");
         String greeting="";
         if (weather!=null){
             greeting="Weather feels like "+weather.getCurrent().getFeelslike();

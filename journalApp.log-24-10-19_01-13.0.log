@@ -1,2 +1,0 @@
-24-10-19 01:13:17.694 [http-nio-8080-exec-7] INFO  c.d.j.controller.UserController - devpanwar
-24-10-19 01:13:17.705 [http-nio-8080-exec-7] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletOutputStream failed to flush: java.nio.channels.ClosedChannelException]
