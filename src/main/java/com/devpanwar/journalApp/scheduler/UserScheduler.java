@@ -4,10 +4,12 @@ import com.devpanwar.journalApp.cache.AppCache;
 import com.devpanwar.journalApp.entity.JournalEntry;
 import com.devpanwar.journalApp.entity.User;
 import com.devpanwar.journalApp.enums.Sentiment;
+import com.devpanwar.journalApp.model.SentimentData;
 import com.devpanwar.journalApp.repository.UserRepositoryImpl;
 import com.devpanwar.journalApp.service.EmailService;
 import com.devpanwar.journalApp.service.SentimentAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +37,9 @@ public class UserScheduler {
     @Autowired
     private AppCache appCache;
 
+    @Autowired
+    private KafkaTemplate<String, SentimentData> kafkaTemplate;
+
 //    we just have to write scheduled annotation to schedule this...and write @EnableScheduler at mainClass..this cron is generated using cron generator online...here this cron means it sends email sentiment every sunday 9 am
     @Scheduled(cron = "0 0 9 * * SUN")
     public void fetchUsersAndSendMail(){
@@ -57,7 +62,12 @@ public class UserScheduler {
                 }
             }
             if (mostFrequentSentiment!=null){
-                emailService.sendEmail(user.getEmail(),"Sentiment for last 7 days", mostFrequentSentiment.toString());
+                SentimentData sentimentData = SentimentData.builder().email(user.getEmail()).sentiment("Sentiment for last 7 days " + mostFrequentSentiment).build();
+                try{
+                    kafkaTemplate.send("weekly-sentiments", sentimentData.getEmail(), sentimentData); //sending the data to kafka topic...here we are sending the data to weekly-sentiments topic
+                }catch (Exception e){
+                    emailService.sendEmail(sentimentData.getEmail(), "Sentiment for previous week", sentimentData.getSentiment());
+                }
             }
         }
     }

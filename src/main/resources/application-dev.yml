@@ -1,9 +1,31 @@
 spring:
+  #  for kafka
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: weekly-sentiment-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    properties:
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username='WOPFITUKFEJ5DFBW' password='SXCDtayb7riRZb6ic9fmaS7D3AcXvl8dpCj2x5CdSwDdS/nyndEBsvxayjGRzx+q';
+      security:
+        protocol: SASL_SSL
+      session:
+        timeout:
+          ms: 45000
+    bootstrap-servers: pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092
+
   application:
     name: Journal App
 
   data:
     redis:
+#      for cloud
       host: redis-11579.crce179.ap-south-1-1.ec2.redns.redis-cloud.com
       port: 11579
       password: DjDYc1NmR13lBNGuwieAMFJ28CAABHxd
@@ -11,6 +33,7 @@ spring:
     #    for local
     #    host: localhost
     #    port: 6379
+
     mongodb:
       uri: mongodb+srv://devpanwar:qazxsw@cluster0.re3e6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
       #if not created already...it will create one
