@@ -23,6 +23,7 @@ public class UserRepositoryImpl {
 //        query.addCriteria(Criteria.where("email").ne(null).ne(""));
 //        if we want to match the email if regular expression...regex
         query.addCriteria(Criteria.where("email").regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,6}$"));
+//        jiska sentimentAnalysis true hai usko select karna hai
         query.addCriteria(Criteria.where("sentimentAnalysis").is(true));
 
 
