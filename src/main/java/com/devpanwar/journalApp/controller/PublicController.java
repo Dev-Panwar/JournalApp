@@ -75,4 +75,9 @@ public class PublicController {
         }
     }
 
+    @GetMapping("/health-check")
+    private ResponseEntity<?> healthCheck() {
+        return new ResponseEntity<>("Health-OK", HttpStatus.OK);
+    }
+
 }
