@@ -5,6 +5,8 @@ import com.devpanwar.journalApp.entity.User;
 import com.devpanwar.journalApp.service.JournalEntryService;
 import com.devpanwar.journalApp.service.UserService;
 import com.devpanwar.journalApp.utils.JwtUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/public")
+@Tag(name = "Public APIs", description = "Login, signup and health check")
 public class PublicController {
 
 //    for jwt auth
@@ -39,6 +42,7 @@ public class PublicController {
     private static final Logger logger= LoggerFactory.getLogger(PublicController.class);
 
 //signUp
+    @Operation(summary = "Create user", description = "Create user with username and password")
     @PostMapping("/create")
     public ResponseEntity<?> createEntry(@RequestBody User theEntry) {
         if (theEntry.getUserName() == null || theEntry.getUserName().isEmpty()) {
@@ -61,6 +65,7 @@ public class PublicController {
         }
     }
 
+    @Operation(summary = "Login", description = "Login with username and password")
     @PostMapping("/login")
     private ResponseEntity<?> login(@RequestBody User user) {
         try {
@@ -75,6 +80,7 @@ public class PublicController {
         }
     }
 
+    @Operation(summary = "Health check", description = "Health check")
     @GetMapping("/health-check")
     private ResponseEntity<?> healthCheck() {
         return new ResponseEntity<>("Health-OK", HttpStatus.OK);

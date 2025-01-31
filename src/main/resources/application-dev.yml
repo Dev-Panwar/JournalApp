@@ -49,6 +49,8 @@ spring:
 
 server:
   port: 8080
+  servlet:
+    context-path: /
 
 # we can write any convention..like here we storing as weather.api.key
 weather:
@@ -64,3 +66,7 @@ weather:
 #    com:
 #      devpanwar:
 #        journalApp: DEBUG
+
+springdoc:
+  swagger-ui:
+    path: /api-docs

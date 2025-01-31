@@ -7,6 +7,8 @@ import com.devpanwar.journalApp.entity.User;
 import com.devpanwar.journalApp.repository.UserRepository;
 import com.devpanwar.journalApp.service.UserService;
 import com.devpanwar.journalApp.service.WeatherService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("/user")
+@Tag(name = "User APIs", description = "Read, update and delete user")
 public class UserController {
 
     @Autowired
@@ -33,6 +36,7 @@ public class UserController {
     @Autowired
     private WeatherService weatherService;
 
+    @Operation(summary = "Update user", description = "Update user with username and password")
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user) {
 //        authentication username and password
@@ -47,6 +51,7 @@ public class UserController {
 
     }
 
+    @Operation(summary = "Delete user", description = "Delete user")
     @DeleteMapping
     public ResponseEntity<?> deleteUser() {
 //        authentication username and password
@@ -59,6 +64,7 @@ public class UserController {
 
     }
 
+    @Operation(summary = "Greeting for the user", description = "Greeting for the the User")
     @GetMapping
     public ResponseEntity<?> greetings() {
 //        authentication username and password
